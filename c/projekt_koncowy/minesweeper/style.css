@@ -1,0 +1,41 @@
+#uncovered{
+    background-color: #ffffed;
+}
+
+#butt1{
+    background-color: #ffffed;
+    color: blue;
+}
+#butt2{
+    background-color: #ffffed;
+    color: red;
+}
+#butt3{
+    background-color: #ffffed;
+    color: green;
+}
+#butt4{
+    background-color: #ffffed;
+    color: orange;
+}
+#butt5{
+    background-color: #ffffed;
+    color: pink;
+}
+#butt6{
+    background-color: #ffffed;
+    color: purple;
+}
+#butt7{
+    background-color: #ffffed;
+    color: yellow;
+}
+#butt8{
+    background-color: #ffffed;
+    color: indigo;
+}
+
+#bomb{
+    background-color: orangered;
+    border-radius: 50%;
+}
