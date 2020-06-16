@@ -1,5 +1,5 @@
-# uwr
-2019/2020
+# UWr
+**2019/2020**
 * Semestr I:
 	* Analiza Matematyczna 
 	* Logika dla Informatyków
