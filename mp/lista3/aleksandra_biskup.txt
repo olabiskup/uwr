@@ -1,0 +1,250 @@
+# MP - dowód
+Grupa:
+Aleksandra Biskup 
+Julita Osman
+Aleksandra Stępniewska
+Dawid Holewa
+
+
+# Polecenie 1:
+
+#### Definicje, które będziemy wykorzystywać: 
+```racket
+(define (map f zs)
+        (if (= zs null)
+            null
+            (cons (f (car zs)) (map f (cdr zs)))))
+
+(define (append xs ys)
+  (if (null? xs)
+      ys
+      (cons (car xs) (append (cdr xs) ys))))
+```
+
+### Teza:
+```
+(map f (append xs ys)) == (append (map f xs)(map f ys))
+```
+#### Dowód przez indukcję względem xs:
+
+Weźmy dowolne xs i ys takie że (list? xs)=#t i (list? ys)=#t
+
+Niech P(xs) będzie własnościa zdefiniowaną poniżej.
+```racket
+P(xs) := (map f (append xs ys)) == (append (map f xs)(map f ys))
+```
+Pokażemy, że P(xs) zachodzi dla dowolnych xs i ys.
+
+Rozpatrzmy przypadki:
+1) Dla xs = null
+
+LEWA STRONA RÓWNANIA: (map f (append xs ys))
+ ```racket
+P(xs) = P(null)  = (map f (append null ys)) 
+                 := (map f (if (lista? null) 
+                           ys  
+                           (cons (car xs)(append (cdr xs) ys))))
+```
+Z założenia wiemy, że xs = null, czyli if zwraca wartość #t, więc zostanie zwócona lista ys.
+Czyli P(null) = (map f ys) 
+
+PRAWA STRONA RÓWNANIA: (append (map f xs)(map f ys))
+```racket
+P(xs) = P(null) = (append (map f null) (map f ys))
+
+Rozpiszmy (map f null) = (if (= xs null)
+                              null
+                             (cons (f (car xs)) (map f (cdr xs))))
+```
+Z założenia wiemy, że xs = null, czyli if zwraca wratość #t, więć zostanie zwórcona wartośc null.
+```racket
+P(null) = (append (map f null) (map f ys)) = (map f ys)
+```
+Czyli lewa strona jest równa prawej.
+
+
+2) Pokażmy, że dla dowolnych x, xs:
+ jeśli zachodzi P(xs) to zachodzi również P((cons x xs))
+
+PRAWA STRONA RÓWNANIA: (map f (append (cons x xs) ys))
+ ```racket
+P(cons x xs)  = (map f (append (cons x xs) ys)) 
+                     := (map f (if (lista? (cons x xs)) 
+                                ys    
+                                (cons (car (cons x xs))(append (cdr (cons x xs)) ys))))
+```
+Z założenia wiemy, że xs jest listą, czyli if zwróc wartość #t, więc zostanie zwócona lista ys.
+Czyli P(cons x xs) = (map f ys) 
+
+LEWA STRONA RÓWNANIA: (append (map f (cons x xs))(map f ys))
+```racket
+P((cons x xs)) = (append (map f (cons x xs)) (map f ys))
+
+Rozpiszmy (map f (cons x xs)) = (if (= (cons x xs) null)
+                                null
+                                (cons (f (car (cons x xs))) (map f (cdr (cons x xs)))))
+                    
+```
+Z założenia wiemy, że xs nie jest listą i nie jest pusta, czyli if zwraca wartość #f, więc zostanie zwórcona wartość wyrażenia
+```racket
+(cons (f (car (cons x xs))) (map f (cdr (cons x xs)))).
+```
+Ropiszmy:
+
+```racket
+(cons (f (car (cons x xs))) (map f (cdr (cons x xs)))) ≡
+(cons (f x) (map f xs))) ≡
+(append (map f (list x)) (map f xs))) 
+```
+Co jest równoważne prawej stronie równania.
+Zatem na mocy indukcji strukturalnej P zachodzi dla dowolnego xs.                      
+Co kończy dowód.
+
+------------------------------------------------------------------
+# Polecenie 2
+#### Definicje, które będziemy wykorzystywać:
+```racket
+(define (filter p? xs)
+  (if (null? xs)
+      null
+      (if (p? (car xs))
+          (cons (car xs)
+                (filter p? (cdr xs)))
+          (filter p? (cdr xs)))))
+
+(define (append xs ys)
+  (if (null? xs)
+      ys
+      (cons (car xs) (append (cdr xs) ys))))
+```
+
+### Teza:
+```racket
+(filter p? (append xs ys)) == (append (filter p? xs) (filter p? ys))
+```
+
+#### Dowód przez indukcję względem xs
+Weźmy dowolne xs i ys takie że (list? xs)=#t i (list? ys)=#t
+
+Niech P(xs) będzie własnościa zdefiniowaną poniżej.
+```racket
+P(xs) := (filter p? (append xs ys)) == (append (filter p? xs) (filter p? ys))
+```
+Pokażemy, że P(xs) zachodzi dla dowolnych xs i ys.
+
+Rozpatrzmy przypadki:
+1) Dla xs = null
+
+LEWA STRONA RÓWNANIA: (filter p? (append xs ys))
+```racket
+P(xs) = P(null) = (filter p? (append null ys)) = 
+                = (filter p? (if (null? null))
+                                 ys
+                                 (cons (car null) (append (cdr null) ys))) =
+                = (filter p? ys)
+                         
+```
+Z założenia wiemy, że xs = null, zatem (filter p? (append null ys))=(filter p? ys)
+
+PRAWA STRONA RÓWNANIA: (append (filter p? xs) (filter p? ys))
+```racket
+P(xs) = P(null) = (append (filter p? null) (filter p? ys)) =
+                = (append (if (null? null) null ...) (filter p? ys)) =
+                = (append null (filter p? ys)) =
+                = (filter p? ys)
+```
+
+A więc przekształcając lewa stronę dochodzimy do prawej.
+Zatem P(null) zachodzi.
+
+
+2) Pokażmy, że dla dowolnych x, xs:
+ jeśli zachodzi P(xs) to zachodzi również P((cons x xs))
+ 
+
+LEWA STRONA RÓWNANIA: (filter p? (append (cons x xs) ys))
+```racket
+P(cons x xs) = (filter p? (append (cons x xs) ys)) = 
+             = (filter p? (cons (car (cons x xs) (append (cdr (cons x xs)) ys)))) =
+             = (filter p? (cons x (append xs ys))) = 
+             = (if (p? (car (cons x (append xs ys))))
+                   (cons (car (cons x (append xs ys)))
+                         (filter p? (cdr (cons x (append xs ys)))))
+                   (filter p? (cdr (cons x (append xs ys))))) = 
+             = (if (p? x)
+                   (cons x (filter p? (append xs ys)))
+                   (filter p? (append xs ys)))
+```
+
+Rozważmy dwa przypadki:
+
+I) (p? x) = #t
+wtedy: cd.
+```racket
+(cons x (filter p? (append xs ys)))
+````
+II) (p? x) = #f
+wtedy: cd.
+```racket
+(filter p? (append xs ys))
+```
+
+PRAWA STRONA RÓWNANIA: (append (filter p? (cons x xs)) (filter p? ys))
+```racket
+P(cons x xs) = (append (filter p? (cons x xs)) (filter p? ys)) =
+             = (append (if (p? (car (cons x xs)))
+                           (cons x (filter p? (cdr (cons x xs))))
+                           (filter p? (cdr (cons x xs))))
+                           (filter p? ys))
+```
+
+Rozwazmy 2 przypadki:
+
+I) (p? x) = #t
+wtedy cd:
+```racket
+(cons x (append (filter p? xs) (filter p? ys)))
+```
+
+II) (p? x) = #f
+wtedy cd:
+```racket
+(append (filter p? xs) (filter p? ys))
+```
+
+Weźmy ostatnie wiersze przekształceń lewej i prawej strony i sprawdźmy dwa przypadki:
+
+I. (p? x) = #t
+Wtedy
+
+L = 
+```racket 
+(cons x (filter p? (append xs ys))) 
+```
+P = 
+```racket
+(cons x (append (filter p? xs) (filter p? ys))) 
+```
+
+czyli L == P, ponieważ x = x i z założenia indukcyjnego
+```racket
+(filter p? (append xs ys)) == (append (filter p? xs) (filter p? ys))
+```
+
+II) (p? x) = #f
+L = 
+```racket 
+(filter p? (append xs ys)) 
+```
+P = 
+```racket 
+(append (filter p? xs) (filter p? ys)) 
+```
+
+czyli L == P, ponieważ z założenia indukcyjnego
+```racket
+(filter p? (append xs ys)) == (append (filter p? xs) (filter p? ys))
+```
+
+Na mocy indukcji strukturalnej P(xs) zachodzi dla dowolnego xs.
+Co kończy dowód.

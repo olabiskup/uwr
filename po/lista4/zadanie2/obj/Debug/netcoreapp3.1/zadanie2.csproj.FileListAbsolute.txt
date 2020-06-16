@@ -1,0 +1,11 @@
+/home/ola/uwr/po/lista4/zadanie2/bin/Debug/netcoreapp3.1/zadanie2
+/home/ola/uwr/po/lista4/zadanie2/bin/Debug/netcoreapp3.1/zadanie2.deps.json
+/home/ola/uwr/po/lista4/zadanie2/bin/Debug/netcoreapp3.1/zadanie2.runtimeconfig.json
+/home/ola/uwr/po/lista4/zadanie2/bin/Debug/netcoreapp3.1/zadanie2.runtimeconfig.dev.json
+/home/ola/uwr/po/lista4/zadanie2/bin/Debug/netcoreapp3.1/zadanie2.dll
+/home/ola/uwr/po/lista4/zadanie2/bin/Debug/netcoreapp3.1/zadanie2.pdb
+/home/ola/uwr/po/lista4/zadanie2/obj/Debug/netcoreapp3.1/zadanie2.csprojAssemblyReference.cache
+/home/ola/uwr/po/lista4/zadanie2/obj/Debug/netcoreapp3.1/zadanie2.AssemblyInfoInputs.cache
+/home/ola/uwr/po/lista4/zadanie2/obj/Debug/netcoreapp3.1/zadanie2.AssemblyInfo.cs
+/home/ola/uwr/po/lista4/zadanie2/obj/Debug/netcoreapp3.1/zadanie2.dll
+/home/ola/uwr/po/lista4/zadanie2/obj/Debug/netcoreapp3.1/zadanie2.pdb
