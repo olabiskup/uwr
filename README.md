@@ -8,7 +8,7 @@
 	* Wstęp do Informatyki
 * Semestr II:
 	* Algebra
-	* **Metody Programowania**
-	* **Programowanie Obiektowe**
 	* **Kurs C++**
+	* **Metody Programowania**
 	* O ekonomii i gospodarce inaczej
+	* **Programowanie Obiektowe**
